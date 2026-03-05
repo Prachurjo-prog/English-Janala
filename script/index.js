@@ -17,6 +17,17 @@ const displayLessonWords = (words)=>{
     const wordContainer = document.getElementById("word-container");
     wordContainer.innerHTML = "";
 
+    if(words.length === 0){
+        wordContainer.innerHTML =`
+        <div class="bg-gray-100 mt-3 p-4 rounded-lg text-center col-span-full">
+       <img class="mx-auto pb-8" src="./images/alert-error.png" alt="alert"/>
+        <p class="bangla md:text-lg mb-3">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+        <h1 class="text-3xl font-semibold">নেক্সট Lesson এ যান</h1>
+        </div>
+        `
+        return;
+    }
+
     for(let word of words){
         const wordDiv = document.createElement("div");
 
