@@ -33,6 +33,12 @@ const loadWordDetails = async(id) => {
     displayWordDetails(json.data);
 };
 
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 const displayWordDetails = (word) => {
     console.log(word)
     const detailsBox = document.getElementById("details-container");
@@ -86,14 +92,14 @@ const displayLessonWords = (words) => {
     const wordDiv = document.createElement("div");
 
     wordDiv.innerHTML = `
-        <div class="bg-white p-5 rounded-lg text-center justify-center items-center">
+        <div class="bg-white p-10 rounded-lg text-center justify-center items-center">
                 <h1 class="text-2xl font-bold mb-2">${word.word}</h1>
                  <p class=" font-medium mb-3">${"meaning"} / ${"pronunciation"}</p>
                 <p class="text-2xl font-medium bangla">"${word.meaning} / ${word.pronunciation}"</p>
                 
                 <div class="flex justify-between">
                     <button onclick="loadWordDetails(${word.id})" class="btn bg-sky-50 hover:bg-sky-100 hover:cursor-pointer p-2 rounded-sm"><i class="fa-regular fa-circle-question "></i></button>
-                    <a class="btn bg-sky-50 hover:bg-sky-100 hover:cursor-pointer p-2 rounded-sm"><i class="fa-solid fa-volume-high"></i></a>
+                    <button onclick="pronounceWord('${word.word}')" class="btn bg-sky-50 hover:bg-sky-100 hover:cursor-pointer p-2 rounded-sm"><i class="fa-solid fa-volume-high"></i></button>
                 </div>
             </div>
         `;
